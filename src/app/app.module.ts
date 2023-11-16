@@ -17,6 +17,7 @@ import { NewProjectComponent } from './shared/features/new-project/new-project.c
 import { SocialsComponent } from './shared/features/socials/socials.component';
 import { LinkShareComponent } from './shared/features/link-share/link-share.component';
 import { OnePagePortfolioComponent } from './shared/features/one-page-portfolio/one-page-portfolio.component';
+import { ChipComponent } from './shared/ui/chip/chip.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +30,17 @@ import { OnePagePortfolioComponent } from './shared/features/one-page-portfolio/
     HeaderComponent,
     ProjectsComponent,
     SettingsComponent,
-    ProjectCardComponent,
-    ButtonComponent,
     NewProjectComponent,
     SocialsComponent,
-    LinkShareComponent,
-    OnePagePortfolioComponent
+    LinkShareComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    OnePagePortfolioComponent,
+    ButtonComponent,
+    ProjectCardComponent,
+    ChipComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

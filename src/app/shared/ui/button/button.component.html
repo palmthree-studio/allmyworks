@@ -1,1 +1,13 @@
-<p>button works!</p>
+<button
+    [ngClass]="{
+        'min-w-[52px] min-h-[52px] text-[2rem] pt-[4px]': size === 'Icon',
+        'p-3 w-full': size !== 'Icon',
+        'text-3xl': size === 'M',
+        'text-6xl': size === 'L',
+        'gradient-quart hover:gradient': style === 'Primary',
+        'bg-transparent hover:white-mid': style === 'Secondary',
+    }"
+    class="border-white border-solid rounded-md border-[1px] text-white nexa"
+>
+    <ng-content></ng-content>
+</button>

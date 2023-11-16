@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@font-face {
+    font-family: Lato;
+    font-style: italic;
+    src: url(./assets/fonts/Lato-MediumItalic.woff2);
+}
+@font-face {
+    font-family: Lato;
+    src: url(./assets/fonts/Lato-Medium.woff2);
+}
+@font-face {
+    font-family: Lato;
+    font-weight: bolder;
+    src: url(./assets/fonts/Lato-Heavy.woff2);
+}
+@font-face {
+    font-family: Nexa;
+    src: url(./assets/fonts/Nexa-Bold.woff2);
+}
+
+body {
+    background-color: #0D091B;
+    color: #FFF;
+    font-family: Lato;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Nexa;
+}

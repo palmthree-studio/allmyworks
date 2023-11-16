@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="47px" viewBox="0 0 46 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <defs>
+        <radialGradient cx="50%" cy="18.9057037%" fx="50%" fy="18.9057037%" r="81.1524005%" gradientTransform="translate(0.500000,0.189057),scale(1.000000,0.999284),rotate(90.000000),scale(1.000000,0.719751),translate(-0.500000,-0.189057)" id="radialGradient-1">
+            <stop stop-color="#FFC600" offset="0%"></stop>
+            <stop stop-color="#B7009B" offset="71.323208%"></stop>
+            <stop stop-color="#070A2D" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Wireframe-(Desktop)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Onboarding-(End)" transform="translate(-940.000000, -25.000000)">
+            <g id="Group-2" transform="translate(939.999032, 24.000000)">
+                <g id="Group" transform="translate(22.860323, 24.718560) rotate(80.000000) translate(-22.860323, -24.718560) translate(3.138893, 4.983000)">
+                    <ellipse id="Oval" fill="url(#radialGradient-1)" cx="19.7214293" cy="19.7355598" rx="19.7214293" ry="19.7355598"></ellipse>
+                    <ellipse id="Oval-Copy" stroke="#0D091B" stroke-width="0.823333333" fill-opacity="0.497214" fill="#34290C" cx="19.7214293" cy="14.4727438" rx="14.0507149" ry="14.0610772"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

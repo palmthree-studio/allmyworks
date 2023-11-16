@@ -1,1 +1,38 @@
-<p>one-page-portfolio works!</p>
+<div>
+    <div class="p-4">
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <div class="relative">
+                <img class="rounded-[2rem]" width="128" src="assets/img/profile.png" alt="profile">
+                <img class="rounded-[2rem] absolute top-0 z-[-1] blur-xl" width="128" src="assets/img/profile.png" alt="profile">
+            </div>
+            <div class="col-span-2">
+                <div>
+                    <h3 class="text-3xl">
+                        Younes YaaS 🌴
+                    </h3>
+                    <small>
+                        @YuuAsAService
+                    </small>
+                </div>
+                <div class="mt-3 flex items-center justify-left space-x-4">
+                    <app-button [size]="'Icon'" [style]="'Primary'">
+                        𝕏
+                    </app-button>
+                    <app-button [size]="'Icon'" [style]="'Primary'">
+                        <img class="mx-auto pb-[4px]" width="32" src="assets/img/instagram.svg" alt="instagram">
+                    </app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 gradient-bg text-center">
+        <a class="text-xl underline" href="#">My book -50% here</a>
+    </div>
+    <div>
+        <app-project-card [projects]="projects"></app-project-card>
+    </div>
+    <div class="text-center text-white text-opacity-50">
+        Powered by <br>
+        <img class="mx-auto" height="32" src="assets/img/logo.svg" alt="instagram">
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div
+    *ngIf="chipValue"
+    class="chip mb-2 mr-2"
+    [ngClass]="{
+        'chip__border-gradient': !customValue && isProjectStatus(chipValue) && chipValue.id !== 2,
+        'chip__border-white': !customValue &&isProjectStatus(chipValue) && chipValue.id === 2,
+        'chip__border-green': customValue
+    }"
+>
+    <div 
+        class="chip__inner"
+        [ngClass]="{
+            'chip__inner-active': customValue || (isProjectStatus(chipValue) && chipValue.id === 0),
+            'chip__inner-inactive': !customValue && isProjectStatus(chipValue) && chipValue.id !== 0,
+        }"
+    >
+        <span class="mr-1" *ngIf="isProjectMetrics(chipValue) && chipValue.currency">{{chipValue.value | numeral:chipValue.currency }}</span>
+        <span>{{chipValue.name}}</span>
+    </div>
+</div>

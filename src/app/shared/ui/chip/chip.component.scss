@@ -1,0 +1,30 @@
+@use '../colors';
+
+.chip {
+    display: inline-block;
+    border-radius: 2rem;
+    padding: 1px;
+    &__inner {
+        margin: 1px;
+        border-radius: 2rem;
+        padding: 4px 10px;
+    }
+    &__inner-active {
+        background: rgb(13 9 27 / 75%);
+    }
+    &__inner-inactive {
+        background: #0d091b;
+    }
+    &__inner-green {
+        background: rgb(13 9 27 / 75%);
+    }
+    &__border-gradient {
+        background: colors.$primary-gradient;
+    }
+    &__border-white {
+        background: #FFF;
+    }
+    &__border-green {
+        background: #2FB46E;
+    }
+}

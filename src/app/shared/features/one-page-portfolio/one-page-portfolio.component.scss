@@ -1,0 +1,5 @@
+@use '../../ui/_colors.scss';
+
+.gradient-bg {
+    background: colors.$primary-gradient;
+}

@@ -1,0 +1,36 @@
+@use '../colors';
+
+.gradient-border {
+    position: relative;
+    box-sizing: border-box;
+    $border: 1px;
+    color: #FFF;
+    background-clip: padding-box; /* !importanté */
+    border: solid $border transparent; /* !importanté */
+    border-radius: 1em;
+  
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      z-index: -1;
+      margin: -$border - 1; /* !importanté */
+      border-radius: inherit; /* !importanté */
+      background: colors.$primary-gradient;
+    }
+    &__active-bg {
+      background: rgb(13 9 27 / 75%);
+    }
+    &__building-bg {
+      background: #0d091b;
+    }
+}
+
+.white-border {
+  border: 1px solid #FFF;
+  border-radius: 1em;
+
+  &__ended-bg {
+    background: #0d091b;
+  }
+}
