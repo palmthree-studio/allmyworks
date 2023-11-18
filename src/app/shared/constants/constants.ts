@@ -24,3 +24,24 @@ export const currencies: { [key: string]: string } = {
     'SEK': 'kr', // Swedish Krona
     'NZD': 'NZ$', // New Zealand Dollar
 }
+
+export const metricsType: string[] = [
+    'Financial',
+    'Other'
+]
+
+export const financialsMetrics: string[] = [
+    'Sales',
+    'Sold',
+    'MRR',
+    'ARR'
+]
+
+export const otherMetrics: string[] = [
+    'followers',
+    'users',
+    'members',
+    'views',
+    'listens',
+    'readers'
+]

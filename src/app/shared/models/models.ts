@@ -4,7 +4,7 @@ export interface ProjectStatus {
 }
 
 export interface ProjectMetrics {
-    currency:string,
+    currency?:string,
     value:number,
     name:string
 }
@@ -17,4 +17,17 @@ export interface Project {
     metrics:ProjectMetrics,
     description:string | null,
     url:string | null,
+}
+
+export interface Profile {
+    name:string,
+    username:string,
+    img:string
+}
+
+export interface Socials {
+    xProfile:string,
+    igProfile:string,
+    urlToPromote:string,
+    msgToPromote:string
 }

@@ -1,35 +1,37 @@
-<div>
+<div *ngIf="(user$ | async) as user">
     <div class="p-4">
         <div class="grid grid-cols-3 gap-4 mb-4">
             <div class="relative">
-                <img class="rounded-[2rem]" width="128" src="assets/img/profile.png" alt="profile">
-                <img class="rounded-[2rem] absolute top-0 z-[-1] blur-xl" width="128" src="assets/img/profile.png" alt="profile">
+                <img class="rounded-[2rem]" width="128" [src]="user.profile.img" alt="profile">
+                <img class="rounded-[2rem] absolute top-0 z-[-1] blur-xl" width="128" [src]="user.profile.img" alt="profile">
             </div>
             <div class="col-span-2">
                 <div>
                     <h3 class="text-3xl">
-                        Younes YaaS 🌴
+                        {{user.profile.name}}
+                        <span *ngIf="!user.profile.name">Your name</span>
                     </h3>
                     <small>
-                        @YuuAsAService
+                        @{{user.profile.username}}
+                        <span *ngIf="!user.profile.username">YourUsername</span>
                     </small>
                 </div>
                 <div class="mt-3 flex items-center justify-left space-x-4">
-                    <app-button [size]="'Icon'" [style]="'Primary'">
+                    <app-button [size]="'Icon'" [style]="'Primary'" *ngIf="user.socials.xProfile">
                         𝕏
                     </app-button>
-                    <app-button [size]="'Icon'" [style]="'Primary'">
+                    <app-button [size]="'Icon'" [style]="'Primary'" *ngIf="user.socials.igProfile">
                         <img class="mx-auto pb-[4px]" width="32" src="assets/img/instagram.svg" alt="instagram">
                     </app-button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="p-2 gradient-bg text-center">
-        <a class="text-xl underline" href="#">My book -50% here</a>
+    <div class="p-2 gradient-bg text-center" *ngIf="user.socials.msgToPromote">
+        <a class="text-xl underline" href="#">{{user.socials.msgToPromote}}</a>
     </div>
     <div>
-        <app-project-card [projects]="projects"></app-project-card>
+        <app-project-card [newProject$]="newProject$" [projects]="projects"></app-project-card>
     </div>
     <div class="text-center text-white text-opacity-50">
         Powered by <br>

@@ -14,7 +14,7 @@
             'chip__inner-inactive': !customValue && isProjectStatus(chipValue) && chipValue.id !== 0,
         }"
     >
-        <span class="mr-1" *ngIf="isProjectMetrics(chipValue) && chipValue.currency">{{chipValue.value | numeral:chipValue.currency }}</span>
+        <span class="mr-1" *ngIf="isProjectMetrics(chipValue)">{{chipValue.value | numeral:chipValue.currency }}</span>
         <span>{{chipValue.name}}</span>
     </div>
 </div>

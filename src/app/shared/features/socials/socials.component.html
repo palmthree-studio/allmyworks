@@ -1,1 +1,32 @@
-<p>socials works!</p>
+<!-- Container for the entire form -->
+<form [formGroup]="socialsForm">
+    <div class="flex items-start space-x-6 p-6 pb-0">
+  
+        <div class="flex flex-col space-y-3 w-full">
+         <div>
+            <label class="text-white block mb-1">Your 𝕏 username</label>
+            <input type="text" formControlName="xProfile" placeholder="Optionnal" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+          </div>
+        </div>
+      
+        <!-- Container for the input fields -->
+        <div class="flex flex-col space-y-3 w-full">
+          <div>
+            <label class="text-white block mb-1">Your Instagram username</label>
+            <input type="text" formControlName="igProfile" placeholder="Optionnal" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+          </div>
+        </div>
+      
+    </div>
+    <div class="p-6 mb-4">
+        <div>
+            <label class="text-white block">URL to promote</label>
+            <small>Want to promote something ? Paste the URL here !</small>
+            <input type="text" formControlName="urlToPromote" placeholder="Optionnal" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+        </div>
+        <div class="mt-6">
+            <label class="text-white block mb-1">Message to promote</label>
+            <input type="text" formControlName="msgToPromote" placeholder="Optionnal" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+        </div>
+    </div>
+</form>

@@ -1,3 +1,4 @@
+@use './app/shared/ui/colors';
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -28,4 +29,17 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: Nexa;
+}
+
+.bg {
+    background-color: colors.$dark;
+}
+
+.sky {
+    background: url('/assets/img/bg.jpeg');
+}
+
+.backdrop {
+    background: rgba(13, 9, 27, 0.5);
+    backdrop-filter: blur(5px);
 }

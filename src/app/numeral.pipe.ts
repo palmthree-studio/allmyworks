@@ -8,20 +8,24 @@ import { currencies } from './shared/constants/constants';
 export class NumeralPipe implements PipeTransform {
   private currencySymbols: { [key: string]: string } = currencies;
 
-  transform(value: number, currencyCode = 'USD'): string {
+  transform(value: number, currencyCode?: string): string {
     if (isNaN(value)) {
       return ''; // ou retourner une chaîne indiquant une valeur non valide
     }
 
     let num = value;
-    const symbols = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
+    const symbols = ['', 'k', 'M', 'B', 'T', 'P', 'E'];
     let tier = Math.log10(num) / 3 | 0;
     let scale = Math.pow(10, tier * 3);
     let scaled = num / scale;
     let formatted = scaled % 1 !== 0 ? scaled.toFixed(1) : scaled.toString();
 
-    // Appliquer le format de la devise et le suffixe numéral
-    return this.formatCurrency(formatted, currencyCode) + (tier > 0 ? symbols[tier] : '');
+    // Appliquer le format de la devise seulement si currencyCode est fourni
+    if (currencyCode) {
+      formatted = this.formatCurrency(formatted, currencyCode);
+    }
+
+    return formatted + (tier > 0 ? symbols[tier] : '');
   }
 
   private formatCurrency(value: string, currencyCode: string): string {
@@ -30,3 +34,4 @@ export class NumeralPipe implements PipeTransform {
     return `${currencySymbol}${value}`;
   }
 }
+

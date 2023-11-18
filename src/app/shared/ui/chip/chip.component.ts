@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ProjectMetrics, ProjectStatus } from '../../models/models'
 import { NumeralPipe } from 'src/app/numeral.pipe';
 
@@ -11,7 +11,8 @@ import { NumeralPipe } from 'src/app/numeral.pipe';
   imports: [
     CommonModule,
     NumeralPipe
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipComponent {
   @Input() customValue:boolean = false;

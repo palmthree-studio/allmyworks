@@ -1,0 +1,22 @@
+  @use '../../../../shared/ui/colors';
+  
+  .progress-container {
+    width: 50%;
+  }
+  .progress-bar {
+    background: white;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress {
+    height: 100%;
+    background: colors.$primary-gradient;
+    width: 0;
+  }
+  .progress-text {
+    font-size: 1rem;
+    color: #FFF;
+    margin-bottom: 0.5rem;
+  }

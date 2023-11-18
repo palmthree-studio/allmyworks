@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./onboarding.component.scss']
 })
 export class OnboardingComponent {
+  currentStep = 3;
+  totalStep = 3;
 
+  nextStep(): void {
+    console.log("go");
+    this.currentStep++;
+  }
 }

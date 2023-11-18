@@ -1,0 +1,8 @@
+input[type='file']::file-selector-button {
+    display: none;
+}
+
+.bg {
+    background-image: url('/assets/img/rounded-bg.png');
+    background-size: cover;
+}

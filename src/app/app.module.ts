@@ -25,13 +25,9 @@ import { ChipComponent } from './shared/ui/chip/chip.component';
     OnboardingComponent,
     DashboardComponent,
     PortfolioComponent,
-    NewUserComponent,
-    ProgressBarComponent,
     HeaderComponent,
     ProjectsComponent,
     SettingsComponent,
-    NewProjectComponent,
-    SocialsComponent,
     LinkShareComponent
   ],
   imports: [
@@ -40,7 +36,11 @@ import { ChipComponent } from './shared/ui/chip/chip.component';
     OnePagePortfolioComponent,
     ButtonComponent,
     ProjectCardComponent,
-    ChipComponent
+    ChipComponent,
+    ProgressBarComponent,
+    NewUserComponent,
+    SocialsComponent,
+    NewProjectComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

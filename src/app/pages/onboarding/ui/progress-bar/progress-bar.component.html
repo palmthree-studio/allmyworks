@@ -1,1 +1,8 @@
-<p>progress-bar works!</p>
+<div class="progress-container text-center mx-auto">
+    <div class="progress-text">
+      Step {{ currentStep }}/{{ totalSteps }}
+    </div>
+    <div class="progress-bar">
+      <div class="progress" [style.width]="(currentStep / totalSteps * 100) + '%'"></div>
+    </div>
+</div>

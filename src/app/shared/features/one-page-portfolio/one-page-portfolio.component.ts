@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ProjectCardComponent } from '../../ui/project-card/project-card.component';
-import { Project } from '../../models/models';
+import { Profile, Project, Socials } from '../../models/models';
+import { CentralService } from '../../services/central.service';
+import { Observable, combineLatest, map } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-one-page-portfolio',
@@ -10,24 +13,27 @@ import { Project } from '../../models/models';
   standalone: true,
   imports: [
     ButtonComponent,
-    ProjectCardComponent
-  ]
+    ProjectCardComponent,
+    AsyncPipe,
+    NgIf
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OnePagePortfolioComponent {
-  projects: Project[] = [{
-    id:0,
-    name:'Project name',
-    img: "/assets/img/icon.svg",
-    url: 'https://allmy.works',
-    description: null,
-    status: {
-      id:1,
-      name: '🛠️ Building'
-    },
-    metrics: {
-      currency: 'USD',
-      value: 2000000,
-      name: 'MRR'
-    }
-  }]
+export class OnePagePortfolioComponent implements OnInit {
+  newProject$: Observable<Omit<Project, 'id'>> = this.centralService.getProject();
+  projects: Project[] = [] as Project[];
+  profile$: Observable<Profile> = this.centralService.getProfile();
+  socials$: Observable<Socials> = this.centralService.getSocials();
+  user$ = combineLatest([this.profile$, this.socials$]).pipe(
+    map(([profile, socials]) => ({ profile, socials }))
+  );
+
+  constructor(
+    private centralService:CentralService
+  ){}
+
+  ngOnInit(): void {
+    
+  }
+
 }
