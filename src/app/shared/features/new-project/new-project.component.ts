@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { CentralService } from 'src/app/shared/services/central.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
@@ -41,7 +41,8 @@ export class NewProjectComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private centralService:CentralService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private cdr:ChangeDetectorRef
   ){}
 
   ngOnInit(): void {
@@ -54,9 +55,9 @@ export class NewProjectComponent implements OnInit {
     });
 
     this.projectForm = this.fb.group({
-      name: [''],
-      img: ['assets/img/icon.svg'],
-      status: [this.projectStatus[1]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      img: ['', Validators.required],
+      status: [this.projectStatus[1], Validators.required],
       description: [null],
       url: [null],
       projectAchievement: ['Financial'],
@@ -71,7 +72,7 @@ export class NewProjectComponent implements OnInit {
     this.projectForm.valueChanges.pipe(
       takeUntil(this.destroyed),
     ).subscribe(val => {
-      console.log(val);
+      this.centralService.setFormStatus(this.projectForm.valid);
       this.centralService.setProject(val);
     });
   }
@@ -86,7 +87,9 @@ export class NewProjectComponent implements OnInit {
         // This will give you the Data URL.
         const url = (e.target as FileReader).result;
         this.projectForm.patchValue({ img: url });
+        this.centralService.setProject(this.projectForm.value);
         this.backgroundImageUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
+        this.cdr.detectChanges();
       };
       reader.readAsDataURL(file);
     }

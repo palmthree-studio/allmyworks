@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Shape</title>
+    <defs>
+        <linearGradient x1="1.27533015e-12%" y1="76.8685619%" x2="80.3605056%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FAFAFA" offset="0%"></stop>
+            <stop stop-color="#F6F6F6" offset="41.9004145%"></stop>
+            <stop stop-color="#F5F5F5" stop-opacity="0.373415647" offset="64.0009133%"></stop>
+            <stop stop-color="#F3F3F3" stop-opacity="0.566269668" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Wireframe-(Desktop)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Onboarding-(End)" transform="translate(-1273.000000, -409.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="Link" transform="translate(811.000000, 394.000000)">
+                <path d="M474.083333,36.375 L474.083333,23.25 L465.645833,23.25 C464.092513,23.25 462.833333,24.5091791 462.833333,26.0625 L462.833333,42.9375 C462.833333,44.4908209 464.092513,45.75 465.645833,45.75 L476.895833,45.75 C478.449154,45.75 479.708333,44.4908209 479.708333,42.9375 L479.708333,40.125 L477.833333,40.125 C475.764974,40.125 474.083333,38.4433587 474.083333,36.375 Z M487.208333,15.75 L487.208333,21.375 L492.833333,21.375 L487.208333,15.75 Z M487.208333,21.375 L487.208333,15.75 L478.770833,15.75 C477.217513,15.75 475.958333,17.0091791 475.958333,18.5625 L475.958333,35.4375 C475.958333,36.9908209 477.217513,38.25 478.770833,38.25 L490.020833,38.25 C491.574154,38.25 492.833333,36.9908209 492.833333,35.4375 L492.833333,21.375 L487.208333,21.375 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

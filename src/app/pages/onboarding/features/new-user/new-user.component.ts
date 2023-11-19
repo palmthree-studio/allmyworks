@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { CentralService } from 'src/app/shared/services/central.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-new-user',
@@ -24,7 +25,8 @@ export class NewUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private centralService:CentralService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
   ){}
 
   ngOnInit(): void {
@@ -37,8 +39,16 @@ export class NewUserComponent implements OnInit {
     });
 
     this.profileForm = this.fb.group({
-      name: [''],
-      username: [''],
+      name: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]],
+      username: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]],
       img: ['assets/img/profile.png']
     });
 
@@ -46,7 +56,7 @@ export class NewUserComponent implements OnInit {
     this.profileForm.valueChanges.pipe(
       takeUntil(this.destroyed),
     ).subscribe(val => {
-      console.log(val);
+      this.centralService.setFormStatus(this.profileForm.valid);
       this.centralService.setProfile(val);
     });
   }
@@ -61,7 +71,9 @@ export class NewUserComponent implements OnInit {
         // This will give you the Data URL.
         const url = (e.target as FileReader).result;
         this.profileForm.patchValue({ img: url });
+        this.centralService.setProfile(this.profileForm.value);
         this.backgroundImageUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
+        this.cdr.detectChanges();
       };
       reader.readAsDataURL(file);
     }

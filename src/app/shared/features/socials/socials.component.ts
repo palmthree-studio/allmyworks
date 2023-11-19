@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { CentralService } from '../../services/central.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { linkedFieldsValidator, urlValidator } from 'src/app/validators.functions';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-socials',
@@ -9,7 +11,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./socials.component.scss'],
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -36,15 +39,15 @@ export class SocialsComponent implements OnInit {
     this.socialsForm = this.fb.group({
       xProfile: [''],
       igProfile: [''],
-      urlToPromote: [''],
-      msgToPromote: ['']
-    });
+      urlToPromote: ['', urlValidator()],
+      msgToPromote: ['', Validators.minLength(8)]
+    }, { validators: linkedFieldsValidator('urlToPromote', 'msgToPromote') });
 
     // Subscribe to form value changes
     this.socialsForm.valueChanges.pipe(
       takeUntil(this.destroyed),
     ).subscribe(val => {
-      console.log(val);
+      this.centralService.setFormStatus(this.socialsForm.valid);
       this.centralService.setSocials(val);
     });
   }

@@ -1,1 +1,4 @@
-<p>link-share works!</p>
+<div class="w-full relative" *ngIf="(profile$ | async) as profile">
+    <input type="url" name="url" [(ngModel)]="URL + profile.username" placeholder="Enter a number" class="w-full p-4 text-xl text-center bg-gray-800 text-white rounded-md placeholder-gray-300" readonly>
+    <button class="absolute top-3 right-3"><img src="/assets/img/copy.svg" width="32"/></button>
+</div>

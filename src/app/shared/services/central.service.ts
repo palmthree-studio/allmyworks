@@ -20,7 +20,7 @@ export class CentralService {
   });
   project = new BehaviorSubject<Omit<Project, 'id'>>({
     name:'Project name',
-    img:'assets/img/icon.svg',
+    img:'',
     status:{
       id:1,
       name: '🛠️ Building'
@@ -29,8 +29,17 @@ export class CentralService {
     description: null,
     url: null
   });
+  isFormValid = new BehaviorSubject<boolean>(false);
 
   constructor() { }
+
+  getFormStatus(): Observable<boolean> {
+    return this.isFormValid.asObservable();
+  }
+
+  setFormStatus(isValid:boolean): void {
+    this.isFormValid.next(isValid);
+  }
 
   getProfile(): Observable<Profile> {
     return this.profile.asObservable();
@@ -53,7 +62,6 @@ export class CentralService {
   }
 
   setProject(project:Omit<Project, 'id'>): void {
-    console.log(JSON.stringify(project.metrics));
     this.project.next(project)
   }
 

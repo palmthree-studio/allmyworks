@@ -4,11 +4,13 @@
         'p-3 w-full': size !== 'Icon',
         'text-3xl': size === 'M',
         'text-6xl': size === 'L',
-        'gradient-quart hover:gradient': style === 'Primary',
-        'bg-transparent hover:white-mid': style === 'Secondary',
+        'gradient-mid': style === 'Primary' && (isValid$ | async) === true,
+        'gradient-quart border-none text-gray-500': style === 'Primary' && (isValid$ | async) === false,
+        'bg-transparent': style === 'Secondary'
     }"
     class="border-white border-solid rounded-md border-[1px] text-white nexa"
     (click)="btnClick()"
+    [disabled]="!(isValid$ | async)"
 >
     <ng-content></ng-content>
 </button>

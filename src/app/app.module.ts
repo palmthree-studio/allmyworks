@@ -27,8 +27,7 @@ import { ChipComponent } from './shared/ui/chip/chip.component';
     PortfolioComponent,
     HeaderComponent,
     ProjectsComponent,
-    SettingsComponent,
-    LinkShareComponent
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,8 @@ import { ChipComponent } from './shared/ui/chip/chip.component';
     ProgressBarComponent,
     NewUserComponent,
     SocialsComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    LinkShareComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

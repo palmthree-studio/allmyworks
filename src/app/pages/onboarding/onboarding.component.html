@@ -1,5 +1,5 @@
 <div class="grid grid-cols-2 gap-4 h-screen">
-    <div class="sky bg-cover min-h-screen p-20 overflow-hidden h-full">
+    <div class="sky bg-cover min-h-screen p-20 overflow-hidden h-full grid place-items-center">
         <div class="backdrop w-[420px] py-4 rounded-2xl mx-auto">
             <app-one-page-portfolio></app-one-page-portfolio>
         </div>
@@ -7,21 +7,57 @@
     <div class="p-8 h-full overflow-auto">
         <img class="mx-auto mb-24" height="32" src="/assets/img/logo.svg" alt="AllMyWorks">
         <div class="mx-auto px-16">
-            <app-progress-bar [currentStep]="currentStep" [totalSteps]="totalStep"></app-progress-bar>
+            <app-progress-bar 
+                [currentStep]="currentStep" 
+                [totalSteps]="totalStep" 
+                *ngIf="currentStep <= 3">
+            </app-progress-bar>
             <div *ngIf="currentStep == 1">
                 <h1 class="text-5xl text-center mt-8">Let’s start creating your page !</h1>
                 <app-new-user></app-new-user>
             </div>
             <div *ngIf="currentStep == 2">
                 <h1 class="text-5xl text-center mt-8">In the infinite web, where can we find you ?</h1>
+                <p class="text-center">You can also pass this step, or choose what you prefer to promote.</p>
                 <app-socials></app-socials>
             </div>
             <div *ngIf="currentStep == 3">
                 <h1 class="text-5xl text-center mt-8">What is your current project ?</h1>
                 <app-new-project></app-new-project>
             </div>
-            <app-button [size]="'M'" [style]="'Primary'" class="w-full px-6 mx-auto" (onClick)="nextStep()">
-                Next step
+            <div *ngIf="currentStep == 4">
+                <div class="bg backdrop-blur p-4 rounded-lg text-center mb-8">
+                    <h1 class="text-5xl text-center mt-8 mb-2">Your page is ready !</h1>
+                    <p class="mb-4">Your bio is waiting that link :</p>
+                    <app-link-share></app-link-share>
+                </div>
+                <h2 class="text-2xl text-center mb-4">What to do now ?</h2>
+                <div class="mb-4">
+                    <app-button 
+                        [size]="'M'" 
+                        [style]="'Primary'" 
+                        class="w-full pr-16 mx-auto">
+                        Add a new project
+                    </app-button>
+                </div>
+                <div>
+                    <app-button 
+                        [size]="'M'" 
+                        [style]="'Secondary'" 
+                        class="w-full pr-16 mx-auto">
+                        Go to dashboard
+                    </app-button>
+                </div>
+            </div>
+            <app-button 
+                *ngIf="currentStep <= 3"
+                class="w-full pr-16 mx-auto"
+                [size]="'M'" 
+                [style]="'Primary'" 
+                (onClick)="nextStep()"
+                [isValid$]="formIsValid$">
+                <span *ngIf="currentStep < 3">Next step</span>
+                <span *ngIf="currentStep === 3">🚀 Launch your page !</span>
             </app-button>
         </div>
     </div>

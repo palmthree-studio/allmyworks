@@ -5,6 +5,7 @@ import { Profile, Project, Socials } from '../../models/models';
 import { CentralService } from '../../services/central.service';
 import { Observable, combineLatest, map } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { AdjustTextSizeDirective } from 'src/app/adjust-text-size.directive';
 
 @Component({
   selector: 'app-one-page-portfolio',
@@ -15,7 +16,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
     ButtonComponent,
     ProjectCardComponent,
     AsyncPipe,
-    NgIf
+    NgIf,
+    AdjustTextSizeDirective
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
