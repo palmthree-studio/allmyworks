@@ -1,1 +1,21 @@
-<p>header works!</p>
+<div class="text-white flex items-center justify-between">
+
+    <div class="p-2">
+      <img src="assets/img/icon.svg" width="32" alt="">
+    </div>
+  
+    <!-- Navigation Links -->
+    <nav class="flex space-x-4">
+      <a (click)="scrollTo('Socials')" class="hover:text-gray-200 cursor-pointer">Socials</a>
+      <a (click)="scrollTo('Projects')" class="hover:text-gray-200 cursor-pointer">Projects</a>
+      <a (click)="scrollTo('Settings')" class="hover:text-gray-200 cursor-pointer">Settings</a>
+    </nav>
+  
+    <!-- Placeholder for the right image -->
+    <div class="p-2">
+        <button>
+            <img src="assets/img/logout.svg" width="24" alt="">
+        </button>
+    </div>
+</div>
+  

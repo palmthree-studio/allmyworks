@@ -1,1 +1,61 @@
-<p>dashboard works!</p>
+<div class="grid grid-cols-2 gap-4 h-screen">
+    <div class="sky bg-cover min-h-screen p-20 overflow-hidden h-full grid place-items-center">
+        <div class="backdrop w-[420px] py-4 rounded-2xl mx-auto">
+            <app-one-page-portfolio [newProject]="addNewProject"></app-one-page-portfolio>
+        </div>
+    </div>
+    <div class="p-8 h-full overflow-auto relative">
+        <img class="fixed w-64 right-0" src="/assets/img/astronaut.png" alt="astro">
+        <div class="bg backdrop-blur p-4 rounded-lg text-center mb-8">
+            <app-header (destination)="scrollToTarget($event)"></app-header>
+        </div>
+        <div class="bg backdrop-blur p-4 rounded-lg text-center mb-8">
+            <h1 class="text-5xl text-center mt-8 mb-2">Hello, Younès !</h1>
+            <p class="mb-4">Your bio is waiting that link :</p>
+            <app-link-share></app-link-share>
+        </div>
+        <div class="bg backdrop-blur p-4 rounded-lg mb-8" #socialsTarget>
+            <div class="flex">
+                <h2 class="text-3xl flex-[2]">🔗 Socials</h2>
+                <app-button
+                    *ngIf="isSocialsFormModifiedAndValid()"
+                    [size]="'S'"
+                    [style]="'Primary'"
+                    [isValid]="isSocialsFormValid"
+                >
+                    Save
+                </app-button>
+            </div>
+            <p class="mb-4">💡Leave a field empty = Make it disappear</p>
+            <app-socials></app-socials>
+        </div>
+        <div class="bg backdrop-blur p-4 rounded-lg mb-8" #projectsTarget>
+            <div class="flex">
+                <h2 class="text-3xl mb-6 flex-[2]">💻 Projects</h2>
+                <app-button
+                        *ngIf="isProjectsFormValid"
+                        [size]="'S'"
+                        [style]="'Primary'"
+                        [isValid]="true"
+                    >
+                        Save
+                </app-button>
+            </div>
+            <app-projects></app-projects>
+        </div>
+        <div class="bg backdrop-blur p-4 rounded-lg mb-8" #settingsTarget>
+            <div class="flex">
+                <h2 class="text-3xl flex-[2]">🛠️ Settings</h2>
+                <app-button
+                        *ngIf="isSettingsFormModifiedAndValid()"
+                        [size]="'S'"
+                        [style]="'Primary'"
+                        [isValid]="isSettingsFormValid"
+                    >
+                        Save
+                </app-button>
+            </div>
+            <app-new-user [isInDashboard]="true"></app-new-user>
+        </div>
+    </div>
+</div>

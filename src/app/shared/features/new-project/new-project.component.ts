@@ -27,7 +27,7 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class NewProjectComponent implements OnInit {
   projectForm!: FormGroup;
-  destroyed = new Subject();
+  destroyed$ = new Subject();
   destroyRef = inject(DestroyRef);
   backgroundImageUrl: SafeStyle | undefined;
   project: Project | undefined;
@@ -47,11 +47,11 @@ export class NewProjectComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const destroyed = new Subject();
+    this.centralService.setFormStatus(false);
  
     this.destroyRef.onDestroy(() => {
-      destroyed.next(void 0);
-      destroyed.complete();
+      this.destroyed$.next(void 0);
+      this.destroyed$.complete();
     });
 
     this.projectForm = this.fb.group({
@@ -70,7 +70,7 @@ export class NewProjectComponent implements OnInit {
 
     // Subscribe to form value changes
     this.projectForm.valueChanges.pipe(
-      takeUntil(this.destroyed),
+      takeUntil(this.destroyed$),
     ).subscribe(val => {
       this.centralService.setFormStatus(this.projectForm.valid);
       this.centralService.setProject(val);

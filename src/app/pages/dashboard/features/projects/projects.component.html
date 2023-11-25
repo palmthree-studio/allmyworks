@@ -1,1 +1,19 @@
-<p>projects works!</p>
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let project of currentProjects" class="gradient-border gradient-border__building-bg flex mb-2" cdkDrag>
+        <div class="flex items-center w-[5%] pl-2">
+            <img class="drag-icon" src="/assets/img/grid.svg" alt="grd">
+        </div>
+        <div class="flex items-center w-[65%]">
+            <img [src]="project.img" alt="icon">
+            <h3 class="ml-2">{{project.name}}</h3>
+        </div>
+        <div class="flex items-center">
+            <button class="mr-4">
+                <h3>✏️ Edit</h3>
+            </button>
+            <button>
+                <h3>🗑️ Remove</h3>
+            </button>
+        </div>
+    </div>
+</div>

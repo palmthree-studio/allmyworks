@@ -34,12 +34,18 @@
             class="w-full" 
             [size]="'M'" 
             [style]="'Secondary'" 
-            [isValid$]="activateButton"
+            [isValid]="activateButton"
             (onClick)="getDetails()"
         >
             Details ...
         </app-button>
-        <app-button *ngIf="project.url" class="w-full" [size]="'M'" [style]="'Primary'">
+        <app-button 
+            *ngIf="project.url" 
+            class="w-full" 
+            [size]="'M'" 
+            [style]="'Primary'"
+            [isValid]="activateButton"
+            >
             <div class="inline-flex items-center h-6 relative top-1 mr-1"><img src="/assets/img/external-link.svg" width="24" alt="project"> Visit</div>
         </app-button>
     </div>

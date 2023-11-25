@@ -17,10 +17,20 @@
                     </small>
                 </div>
                 <div class="mt-3 flex items-center justify-left space-x-4">
-                    <app-button [size]="'Icon'" [style]="'Primary'" *ngIf="user.socials.xProfile">
+                    <app-button 
+                        [size]="'Icon'" 
+                        [style]="'Primary'" 
+                        [isValid]="true"
+                        *ngIf="user.socials.xProfile"
+                    >
                         𝕏
                     </app-button>
-                    <app-button [size]="'Icon'" [style]="'Primary'" *ngIf="user.socials.igProfile">
+                    <app-button 
+                        [size]="'Icon'" 
+                        [style]="'Primary'"
+                        [isValid]="true"
+                        *ngIf="user.socials.igProfile"
+                    >
                         <img class="mx-auto pb-[4px]" width="32" src="assets/img/instagram.svg" alt="instagram">
                     </app-button>
                 </div>
@@ -31,7 +41,7 @@
         <a class="text-xl underline" href="#">{{user.socials.msgToPromote}}</a>
     </div>
     <div>
-        <app-project-card [newProject$]="newProject$" [projects]="projects"></app-project-card>
+        <app-project-card [addNewProject]="newProject" [newProject$]="newProject$" [projects]="(projects$ | async) ?? []"></app-project-card>
     </div>
     <div class="text-center text-white text-opacity-50">
         Powered by <br>

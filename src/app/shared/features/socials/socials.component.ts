@@ -4,6 +4,7 @@ import { CentralService } from '../../services/central.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { linkedFieldsValidator, urlValidator } from 'src/app/validators.functions';
 import { NgIf } from '@angular/common';
+import { Socials } from '../../models/models';
 
 @Component({
   selector: 'app-socials',
@@ -18,8 +19,9 @@ import { NgIf } from '@angular/common';
 })
 export class SocialsComponent implements OnInit {
 
+  social:Socials | undefined;
   socialsForm!: FormGroup;
-  destroyed = new Subject();
+  destroyed$ = new Subject();
   destroyRef = inject(DestroyRef);
 
   constructor(
@@ -28,26 +30,38 @@ export class SocialsComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-
-    const destroyed = new Subject();
  
     this.destroyRef.onDestroy(() => {
-      destroyed.next(void 0);
-      destroyed.complete();
+      this.destroyed$.next(void 0);
+      this.destroyed$.complete();
     });
 
+    //Subscribe to profile value
+    this.centralService.getSocials()
+    .pipe(
+      takeUntil(this.destroyed$)
+    )
+    .subscribe({
+      next:social =>{
+        this.social = social;
+      }
+    })
+
     this.socialsForm = this.fb.group({
-      xProfile: [''],
-      igProfile: [''],
-      urlToPromote: ['', urlValidator()],
-      msgToPromote: ['', Validators.minLength(8)]
+      xProfile: [this.social?.xProfile ?? ''],
+      igProfile: [this.social?.igProfile ?? ''],
+      urlToPromote: [this.social?.urlToPromote ?? '', urlValidator()],
+      msgToPromote: [this.social?.msgToPromote ?? '', Validators.minLength(8)]
     }, { validators: linkedFieldsValidator('urlToPromote', 'msgToPromote') });
 
     // Subscribe to form value changes
     this.socialsForm.valueChanges.pipe(
-      takeUntil(this.destroyed),
+      takeUntil(this.destroyed$),
     ).subscribe(val => {
+      // For onboarding
       this.centralService.setFormStatus(this.socialsForm.valid);
+      // For dashboard
+      this.centralService.setFormStatus(this.socialsForm.valid, 'Socials');
       this.centralService.setSocials(val);
     });
   }

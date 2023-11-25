@@ -18,6 +18,7 @@ import { SocialsComponent } from './shared/features/socials/socials.component';
 import { LinkShareComponent } from './shared/features/link-share/link-share.component';
 import { OnePagePortfolioComponent } from './shared/features/one-page-portfolio/one-page-portfolio.component';
 import { ChipComponent } from './shared/ui/chip/chip.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ChipComponent } from './shared/ui/chip/chip.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DragDropModule,
     OnePagePortfolioComponent,
     ButtonComponent,
     ProjectCardComponent,

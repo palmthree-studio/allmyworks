@@ -16,9 +16,10 @@ import { CentralService } from '../../services/central.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit {
-  @Input() size: 'Icon' | 'M' | 'L' | undefined;
+  @Input() size: 'Icon' | 'S' | 'M' | 'L' | undefined;
   @Input() style: 'Primary' | 'Secondary' = 'Primary';
-  @Input() isValid$: Observable<boolean> | undefined;
+  @Input() isValid: boolean | null = null;
+  @Input() inDashboard?: boolean | undefined;
   @Output() onClick = new EventEmitter<void>();
 
   constructor(

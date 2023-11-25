@@ -27,9 +27,10 @@ import { CentralService } from '../../services/central.service';
 export class ProjectCardComponent implements OnInit {
   @Input() newProject$!: Observable<Omit<Project, 'id'>>;
   @Input() projects: Project[] = [];
+  @Input() addNewProject: boolean = false;
   combinedProjects$!: Observable<Project[]>;
   seeMore = false;
-  activateButton = of(true);
+  activateButton = true;
 
   constructor(
     private centralService:CentralService
@@ -38,7 +39,8 @@ export class ProjectCardComponent implements OnInit {
   ngOnInit() {
     this.combinedProjects$ = combineLatest([this.newProject$.pipe(startWith(null)), of(this.projects)]).pipe(
       map(([newProject, projects]) => {
-        return newProject ? [{ ...newProject, id: 0 }, ...projects] : projects;
+        console.log(newProject);
+        return newProject && this.addNewProject ? [{ ...newProject, id: 0 }, ...projects] : projects;
       })
     );
   }

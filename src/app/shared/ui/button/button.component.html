@@ -2,15 +2,16 @@
     [ngClass]="{
         'min-w-[52px] min-h-[52px] text-[2rem] pt-[4px]': size === 'Icon',
         'p-3 w-full': size !== 'Icon',
+        'text-base px-4 py-2': size === 'S',
         'text-3xl': size === 'M',
         'text-6xl': size === 'L',
-        'gradient-mid': style === 'Primary' && (isValid$ | async) === true,
-        'gradient-quart border-none text-gray-500': style === 'Primary' && (isValid$ | async) === false,
+        'gradient-mid': style === 'Primary' && isValid === true,
+        'gradient-quart border-none text-gray-500': style === 'Primary' && isValid === false,
         'bg-transparent': style === 'Secondary'
     }"
     class="border-white border-solid rounded-md border-[1px] text-white nexa"
     (click)="btnClick()"
-    [disabled]="!(isValid$ | async)"
+    [disabled]="!isValid"
 >
     <ng-content></ng-content>
 </button>

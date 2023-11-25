@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +7,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
+
+  @Output() destination = new EventEmitter<string>();
+
+  scrollTo(destination:string): void {
+    this.destination.emit(destination);
+  }
 
 }
