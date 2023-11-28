@@ -2,6 +2,8 @@ import { Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@a
 import { Observable, Subject, combineLatest, forkJoin, take, takeUntil, tap } from 'rxjs';
 import { Profile, Project, Socials } from 'src/app/shared/models/models';
 import { CentralService } from 'src/app/shared/services/central.service';
+import { Router,ActivatedRoute } from '@angular/router';
+import { placeholderProject } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,18 +24,32 @@ export class DashboardComponent implements OnInit {
   isSocialsFormValid = true;
   isSettingsFormValid = true;
   isProjectsFormValid = true;
+  projectView = false;
+  editMode= false;
   addNewProject = false;
   destroyed$ = new Subject();
   destroyRef = inject(DestroyRef);
 
   constructor(
-    private centralService:CentralService
+    private centralService:CentralService,
+    private router: Router,
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
       this.destroyRef.onDestroy(() => {
         this.destroyed$.next(void 0);
         this.destroyed$.complete();
+      });
+
+      this.route.queryParams.subscribe(params => {
+        this.projectView = params['new'] === '1' || params['edit'];
+        if(params['edit']){
+          this.editMode = true;
+        } else {
+          this.editMode = false;
+        }
+        console.log(this.projectView);
       });
 
       // Set initial values on first emission
@@ -112,6 +128,29 @@ export class DashboardComponent implements OnInit {
   isSettingsFormModifiedAndValid(): boolean {
     return JSON.stringify(this.initialSettingsForm) !== JSON.stringify(this.currentSettingsForm) &&
            this.isSettingsFormValid;
+  }
+
+  backToDashboard(): void {
+    if(!this.editMode){
+      this.centralService.startProjectCreation(false);
+      this.centralService.setProject({...placeholderProject});
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { new: null },
+        queryParamsHandling: 'merge'
+      });
+    }
+    let mode = this.editMode ? { edit: null } : { new: null }
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: mode,
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  projectCreation(): void {
+    this.centralService.startProjectCreation(true);
+    this.router.navigate(['/dashboard'], { queryParams: { new: '1' } });
   }
 
 }

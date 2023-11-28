@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../ui/button/button.component';
-import { ProjectCardComponent } from '../../ui/project-card/project-card.component';
+import { ProjectCardComponent } from '../../ui/projects-card/project-card.component';
 import { Profile, Project, Socials } from '../../models/models';
 import { CentralService } from '../../services/central.service';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, combineLatest, map, of } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AdjustTextSizeDirective } from 'src/app/adjust-text-size.directive';
 
@@ -24,7 +24,7 @@ import { AdjustTextSizeDirective } from 'src/app/adjust-text-size.directive';
 export class OnePagePortfolioComponent implements OnInit {
   @Input() newProject: boolean = false;
   newProject$: Observable<Omit<Project, 'id'>> = this.centralService.getProject();
-  projects$: Observable<Project[]> | undefined;
+  projects$!: Observable<Project[]>;
   profile$: Observable<Profile> = this.centralService.getProfile();
   socials$: Observable<Socials> = this.centralService.getSocials();
   user$ = combineLatest([this.profile$, this.socials$]).pipe(

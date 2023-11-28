@@ -1,4 +1,4 @@
-import { ProjectStatus } from "../models/models";
+import { Project, ProjectMetrics, ProjectStatus } from "../models/models";
 
 export const ProjectsStatus: ProjectStatus[] = [{
         id: 0,
@@ -45,3 +45,15 @@ export const otherMetrics: string[] = [
     'listens',
     'readers'
 ]
+
+export const placeholderProject: Omit<Project, 'id'> = {
+    name:'Project name',
+    img:'',
+    status:{
+      id:1,
+      name: '🛠️ Building'
+    },
+    metrics:{} as ProjectMetrics,
+    description: null,
+    url: null
+}

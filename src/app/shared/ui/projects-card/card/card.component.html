@@ -1,6 +1,6 @@
-<div 
+<div
+    *ngIf="project"
     class="m-4 p-3"
-    *ngFor="let project of (combinedProjects$ | async)"
     [ngClass]="{
         'gradient-border': project.status.id !== 2,
         'white-border': project.status.id === 2,

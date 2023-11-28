@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Profile, Project, ProjectMetrics, ProjectStatus, Socials } from '../models/models';
-
+import { placeholderProject } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +18,9 @@ export class CentralService {
     urlToPromote:'',
     msgToPromote:''
   });
-  project = new BehaviorSubject<Omit<Project, 'id'>>({
-    name:'Project name',
-    img:'',
-    status:{
-      id:1,
-      name: '🛠️ Building'
-    },
-    metrics:{} as ProjectMetrics,
-    description: null,
-    url: null
-  });
+  project = new BehaviorSubject<Omit<Project, 'id'>>({...placeholderProject});
   projects = new BehaviorSubject<Project[]>([{
-    id:1,
+    id:134252,
     img: '/assets/img/icon.svg',
     name:'Palmthree Studio',
     status: {
@@ -41,7 +31,7 @@ export class CentralService {
     description: null,
     url: null
   },{
-    id:2,
+    id:286433,
     img: '/assets/img/icon.svg',
     name:'Palmthree',
     status: {
@@ -52,7 +42,7 @@ export class CentralService {
     description: null,
     url: null
   },{
-    id:3,
+    id:322621,
     img: '/assets/img/icon.svg',
     name:'Palmt',
     status: {
@@ -63,6 +53,7 @@ export class CentralService {
     description: null,
     url: null
   }]);
+  hasRequestedNewProject = new BehaviorSubject<boolean>(false)
   isFormValid = new BehaviorSubject<boolean>(false);
   isSocialsFormValid = new BehaviorSubject<boolean>(false);
   isProjectsFormValid = new BehaviorSubject<boolean>(false);
@@ -134,11 +125,25 @@ export class CentralService {
   }
 
   setProjects(projects:Project[]): void {
-    this.projects.next(projects)
+    this.projects.next(projects);
   }
 
   setProject(project:Omit<Project, 'id'>): void {
     this.project.next(project)
+  }
+
+  editProject(projectID: number, project: Project): void {
+    let projects = this.projects.getValue();
+    let updatedProjects = projects.map((p, index) => index === projectID ? project : p);
+    this.projects.next(updatedProjects);
+  }
+
+  startProjectCreation(choice:boolean): void {
+    this.hasRequestedNewProject.next(choice);
+  }
+
+  getProjectCreationStatus(): Observable<boolean> {
+    return this.hasRequestedNewProject.asObservable();
   }
 
 }

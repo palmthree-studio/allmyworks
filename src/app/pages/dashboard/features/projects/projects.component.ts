@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Project } from 'src/app/shared/models/models';
 import { CentralService } from 'src/app/shared/services/central.service';
 import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -18,7 +19,8 @@ export class ProjectsComponent implements OnInit {
   destroyRef = inject(DestroyRef);
 
   constructor(
-    private centralService: CentralService
+    private centralService: CentralService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,5 +44,17 @@ export class ProjectsComponent implements OnInit {
     moveItemInArray(this.currentProjects, event.previousIndex, event.currentIndex);
     this.centralService.setProjects(this.currentProjects);
     this.centralService.setProjectsListStatus(JSON.stringify(this.initialList) !== JSON.stringify(this.currentProjects));
+  }
+
+  editProject(projectID:number): void {
+    this.router.navigate(['/dashboard'], { queryParams: { edit: projectID } });
+  }
+
+  removeProject(projectID:number): void {
+    if (confirm("It'll be lost forever, are you sure ?")) {
+      this.currentProjects = this.currentProjects.filter(object => object.id !== projectID);
+      console.log(this.currentProjects);
+      this.centralService.setProjects(this.currentProjects);
+    }
   }
 }

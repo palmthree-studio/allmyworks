@@ -1,0 +1,53 @@
+<!-- Container for the entire form -->
+<form [formGroup]="signUpForm">
+
+  <h1 class="text-5xl text-center mt-8">Let's create your account, it's free !</h1>
+
+    <div class="flex items-start space-x-6 p-6 pb-0">
+  
+        <div class="flex flex-col space-y-3 w-full">
+         <div>
+            <label class="text-white block mb-1">Your name</label>
+            <input type="text" formControlName="name" placeholder="John" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+          </div>
+        </div>
+      
+        <!-- Container for the input fields -->
+        <div class="flex flex-col space-y-3 w-full">
+          <div>
+            <label class="text-white block mb-1">Your e-mail</label>
+            <input type="email" formControlName="email" placeholder="john@doe.co" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+          </div>
+        </div>
+      
+    </div>
+    <div class="flex items-start space-x-6 p-6 pb-0 mb-8">
+  
+        <div class="flex flex-col space-y-3 w-full">
+         <div>
+            <label class="text-white block mb-1">Your password</label>
+            <input type="password" formControlName="password" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+            <div *ngIf="signUpForm.get('password')?.errors?.['invalidPassword']">The password must contain at least one upper case letter, one lower case letter, one number, one special character and be at least 8 characters long.</div>
+          </div>
+        </div>
+      
+        <!-- Container for the input fields -->
+        <div class="flex flex-col space-y-3 w-full">
+          <div>
+            <label class="text-white block mb-1">Confirm your password</label>
+            <input type="password" formControlName="confirmPw" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
+            <div *ngIf="signUpForm.errors?.['notSame']">The passwords do not match.</div>
+          </div>
+        </div>
+      
+    </div>
+
+    <app-button
+      [isValid]="this.signUpForm.valid"
+      [size]="'M'"
+      [style]="'Primary'"
+    >
+      Create my account
+    </app-button>
+
+</form>

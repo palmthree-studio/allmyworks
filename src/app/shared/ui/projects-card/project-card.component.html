@@ -1,0 +1,8 @@
+<app-card
+    *ngIf="(addNewProject$ | async)"
+    [project]="newProject"
+></app-card>
+<app-card
+    *ngFor="let project of (projects$ | async)"
+    [project]="project"
+></app-card>
