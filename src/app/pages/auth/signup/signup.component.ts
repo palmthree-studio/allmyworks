@@ -2,6 +2,9 @@ import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { ButtonComponent } from "../../../shared/ui/button/button.component";
+import { CrudService } from 'src/app/shared/services/crud.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-signup',
@@ -12,14 +15,19 @@ import { ButtonComponent } from "../../../shared/ui/button/button.component";
         ReactiveFormsModule,
         FormsModule,
         NgIf,
-        ButtonComponent
+        ButtonComponent,
+        RouterLink
     ]
 })
 export class SignupComponent implements OnInit {
 
   signUpForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService:AuthService,
+    private crudService:CrudService
+    ) {}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -46,6 +54,15 @@ export class SignupComponent implements OnInit {
       let confirmPass = group.get(confirmPassword)?.value;
       return pass === confirmPass ? null : { notSame: true };
     }
+  }
+
+  createAccount(): void {
+    let infos = {
+      email: this.signUpForm.get('email')?.value,
+      password: this.signUpForm.get('password')?.value
+    }
+    let firstName = this.signUpForm.get('name')?.value;
+    this.authService.signUpWithEmailPw(infos,firstName);
   }
 
 }

@@ -1,1 +1,5 @@
 <router-outlet></router-outlet>
+<!-- Overlay -->
+<div class="fixed inset-0 bg-[#0D091B] flex items-center justify-center" *ngIf="(loader$ | async)">
+    <img width="120" src="/assets/img/loader.png" alt="Loader" class="floating-animation">
+</div>

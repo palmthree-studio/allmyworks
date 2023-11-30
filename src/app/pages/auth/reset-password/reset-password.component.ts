@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
 
 @Component({
@@ -12,16 +14,27 @@ import { ButtonComponent } from 'src/app/shared/ui/button/button.component';
       ReactiveFormsModule,
       FormsModule,
       NgIf,
-      ButtonComponent
+      ButtonComponent,
+      RouterLink
   ]
 })
 export class ResetPasswordComponent {
 
   resetForm!: FormGroup;
+  obbCode = '';
+  pwIsReset = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private route:ActivatedRoute
+    ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.obbCode = params['oobCode'];
+      console.log(this.obbCode);
+    });
     this.resetForm = this.fb.group({
         password: ['', [Validators.required, this.passwordValidator]],
         confirmPw: ['', Validators.required]
@@ -45,6 +58,17 @@ export class ResetPasswordComponent {
       let confirmPass = group.get(confirmPassword)?.value;
       return pass === confirmPass ? null : { notSame: true };
     }
+  }
+
+  confirmNewPW(): void {
+    this.auth.confirmPwReset(this.obbCode, this.resetForm.get('password')?.value).then(
+      success => {
+        this.pwIsReset = success;
+      },
+      err => {
+        console.error(err);
+      }
+    )
   }
 
 }

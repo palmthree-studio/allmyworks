@@ -59,6 +59,7 @@ export class CentralService {
   isProjectsFormValid = new BehaviorSubject<boolean>(false);
   isSettingsFormValid = new BehaviorSubject<boolean>(false);
   isProjectsListValid = new BehaviorSubject<boolean>(false);
+  loader = new BehaviorSubject<boolean>(true);
 
   constructor() { }
 
@@ -144,6 +145,18 @@ export class CentralService {
 
   getProjectCreationStatus(): Observable<boolean> {
     return this.hasRequestedNewProject.asObservable();
+  }
+
+  enableLoader(): void {
+    this.loader.next(true);
+  }
+
+  disableLoader(): void {
+    this.loader.next(false);
+  }
+
+  getLoaderStatus(): Observable<boolean> {
+    return this.loader.asObservable();
   }
 
 }

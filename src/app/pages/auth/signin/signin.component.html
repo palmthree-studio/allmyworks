@@ -1,4 +1,4 @@
-<form [formGroup]="signInForm">
+<form [formGroup]="signInForm" (ngSubmit)="signIn()">
     <h1 class="text-5xl text-center mt-8">Nice to see you again, captain ! 🧑🏻‍🚀</h1>
 
     <div class="p-6 mb-4">
@@ -7,7 +7,7 @@
             <input type="email" formControlName="email" placeholder="john@doe.co" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
         </div>
         <div class="mt-6">
-            <label class="text-white block mb-1">Your password</label>
+            <label class="text-white block mb-1">Your password (<a class="underline" [routerLink]="['/auth/forget']">I forgot it ...</a>)</label>
             <input type="password" formControlName="password" class="w-full bg-gray-800 text-white rounded-md p-2 placeholder-gray-300">
         </div>
     </div>
@@ -19,5 +19,5 @@
     >
       Sign in
     </app-button>
-    <p class="text-center">You don't have an account ? <a routerLink="/auth/sign-up">Click here</a> to create one, it's fast and free. 🚀</p>
+    <p class="text-center mt-4">You don't have an account ? <a class="underline" [routerLink]="['/auth/sign-up']">Click here</a> to create one, it's fast and free. 🚀</p>
 </form>

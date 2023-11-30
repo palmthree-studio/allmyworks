@@ -1,5 +1,5 @@
 <!-- Container for the entire form -->
-<form [formGroup]="signUpForm">
+<form [formGroup]="signUpForm" (ngSubmit)="createAccount()">
 
   <h1 class="text-5xl text-center mt-8">Let's create your account, it's free !</h1>
 
@@ -50,4 +50,5 @@
       Create my account
     </app-button>
 
+    <p class="text-center mt-4">You already have an account ? <a class="underline" [routerLink]="['/auth/sign-in']">Click here</a> to log in. 🚀</p>
 </form>

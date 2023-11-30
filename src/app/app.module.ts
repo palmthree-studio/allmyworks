@@ -29,6 +29,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     provideFirebaseApp(() => initializeApp({"projectId":"all-my-works-app","appId":"1:474426880622:web:c65c0646f2d8798bccec7f","storageBucket":"all-my-works-app.appspot.com","apiKey":"AIzaSyCzWqC0xvNyDECeFOL2dQYkiALBT6hzl4c","authDomain":"all-my-works-app.firebaseapp.com","messagingSenderId":"474426880622"})),
     provideAnalytics(() => getAnalytics()),
     provideDatabase(() => getDatabase()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    provideAuth(() => getAuth())
   ],
   providers: [
     ScreenTrackingService
